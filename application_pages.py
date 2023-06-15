@@ -30,7 +30,7 @@ def month_to_year(months):
 
 def logging(error):
     with open('loggs/logging.txt', 'a+') as log_file:
-        log_file.write(datetime.datetime.now() + ':' + error)
+        log_file.write(str(datetime.datetime.now()) + ':' + error)
 
 with open('models/label_encoder', 'rb') as file:
     le = pickle.load(file)
