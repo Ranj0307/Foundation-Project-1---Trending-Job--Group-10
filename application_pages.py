@@ -30,7 +30,7 @@ def month_to_year(months):
 
 def logging(error):
     with open('loggs/logging.txt', 'a+') as log_file:
-        log_file.write(str(datetime.datetime.now()) + ':' + error)
+        log_file.write(datetime.datetime.now() + ':' + error)
 
 with open('models/label_encoder', 'rb') as file:
     le = pickle.load(file)
@@ -44,42 +44,38 @@ def main():
     page_section = st.sidebar.radio("Sections: ", ('Input Requirement', 'Matching Profiles', 'Display Acceptance', 'Model Performance'))
 
     if (page_section == 'Input Requirement'):
-        st.title(f"CURRENTLY IN DATABASE")
-        best_profiles = find_all()
-        # print(best_profiles)
-        # st.dataframe(best_profiles)
-        # Font Awesome CDN links
-        fa_icons = """
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-        """
-        st.markdown(fa_icons, unsafe_allow_html=True)
-        st.markdown(
-        f"""
-        <div style="display: flex; flex-direction: row;">
-            <div class = "card" ">
-                <i class="fas fa-users"></i>
-                <h3>Total Candidates</h3>
-                <p>{best_profiles.shape[0]}</p>
-            </div>
-            <div class = "card" ">
-                <i class="fas fa-dollar-sign"></i>
-                <h3>Median Salary</h3>
-                <p>₹ {best_profiles['Current Salary'].median()}</p>
-            </div>
-            <div class = "card"  ">
-                <i class="fas fa-calendar-alt"></i>
-                <h3>Mean Experience</h3>
-                <p>{int(best_profiles['Years'].mean())} Months</p>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True)
-        del best_profiles
+        # st.title(f"CURRENTLY IN DATABASE")
+        # best_profiles = find_all()
+        # fa_icons = """
+        #     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        # """
+        # st.markdown(fa_icons, unsafe_allow_html=True)
+        # st.markdown(
+        # f"""
+        # <div style="display: flex; flex-direction: row;">
+        #     <div class = "card" ">
+        #         <i class="fas fa-users"></i>
+        #         <h3>Total Candidates</h3>
+        #         <p>{best_profiles.shape[0]}</p>
+        #     </div>
+        #     <div class = "card" ">
+        #         <i class="fas fa-dollar-sign"></i>
+        #         <h3>Median Salary</h3>
+        #         <p>₹ {best_profiles['Current Salary'].median()}</p>
+        #     </div>
+        #     <div class = "card"  ">
+        #         <i class="fas fa-calendar-alt"></i>
+        #         <h3>Mean Experience</h3>
+        #         <p>{int(best_profiles['Years'].mean())} Months</p>
+        #     </div>
+        # </div>
+        # """,
+        # unsafe_allow_html=True)
+        # del best_profiles
         st.title(f"ENTER JOB DETAILS HERE")
         # Define the select box options
-        # role_options = ['Role 1', 'Role 2', 'Role 3']
         experience_options = ['0-1 years', '2-5 years', '6-10 years', '>10 years']
-        # skills_options = ['Skill 1', 'Skill 2', 'Skill 3']
+
         education_options = ['Undergraduate', 'Postgraduate', 'PhD']
 
         form_data = st.form(key='job_form')
